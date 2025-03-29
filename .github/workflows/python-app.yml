@@ -1,0 +1,24 @@
+name: Python Application CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+      
+      - name: Install Dependencies
+        run: pip install pylint pytest
+      
+      - name: Run Linter
+        run: pylint app.py
+      
+      - name: Run Tests
+        run: pytest test_app.py
